@@ -1,4 +1,4 @@
-package processing.app;
+package processing.app.unit;
 
 import static org.junit.Assert.assertTrue;
 
