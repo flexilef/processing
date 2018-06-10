@@ -1,54 +1,57 @@
 package processing.app.unit;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import junit.framework.Assert;
-import processing.app.Base;
-import processing.app.Console;
-import processing.app.Platform;
-import processing.app.Sketch;
 import processing.app.SketchCode;
-import processing.app.ui.Editor;
 
 public class SketchCodeTests {
 
   private static String SKETCH_PATH = "test/resources/SketchTests.pde";
   private static String NEW_SKETCH_NAME = "SketchTestsNew.pde";
   private static String SKETCH_PATH_NEW = "test/resources/" + NEW_SKETCH_NAME;
+  private static String PROGRAM = "System.out.println(\"Hello World\")";
+  private static int EMPTY_PROGRAM_LINE_COUNT = 1;
+  
+  private File sketch;
+  private File newSketch;
+  private SketchCode sketchCode;
 
   public SketchCodeTests() {
-
+    sketch = new File(SKETCH_PATH);
+    newSketch = new File(SKETCH_PATH_NEW);
   }
 
   @Before
   public void setup() {
-    // Set up something for the test.
+    try {
+      sketch.createNewFile();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   @After
-  public void teardown() {
-    // Tear down something for the test.
+  public void teardown() {    
+    //delete generated test files    
+    if(newSketch.exists()) {
+      newSketch.delete();
+    }
     
-    //delete generated test files
-    File newSketch = new File(SKETCH_PATH_NEW);
-    newSketch.delete();
+    if(sketch.exists()) {
+      sketch.delete();
+    }
   }
-
+  
+  //Coverage - app: 72 lines; core: 59 lines
   @Test
-  public void shouldSaveAsNewFile() {
-    SketchCode sketchCode = new SketchCode(new File(SKETCH_PATH), ".pde");
-    File newSketch = new File(SKETCH_PATH_NEW);
-    
+  public void shouldSaveAsNewFile() {    
+    sketchCode = new SketchCode(sketch, ".pde");
+
     try {
       sketchCode.saveAs(newSketch);
     } catch (IOException e) {   
@@ -58,5 +61,31 @@ public class SketchCodeTests {
     
     Assert.assertTrue(newSketch.exists());
     Assert.assertEquals(sketchCode.getFileName(), NEW_SKETCH_NAME);
+  }
+  
+  //Coverage is increased by 25 lines when executing shouldSaveProgram()
+  //and shouldRetrieveLineCountOfEmptyProgram()
+  //Coverage - app: 97 lines; core: 59 lines 
+  @Test
+  public void shouldSaveProgram() {
+    sketchCode = new SketchCode(sketch, ".pde");
+    sketchCode.setProgram(PROGRAM);
+    
+    try {
+      sketchCode.save();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+    Assert.assertEquals(sketchCode.getSavedProgram(), PROGRAM);
+  }
+  
+  @Test
+  public void shouldRetrieveLineCountOfEmptyProgram() {
+    sketchCode = new SketchCode(sketch, ".pde");
+    int lines = sketchCode.getLineCount();
+        
+    Assert.assertEquals(EMPTY_PROGRAM_LINE_COUNT, lines);
   }
 }

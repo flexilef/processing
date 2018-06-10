@@ -15,5 +15,10 @@
 	<classpathentry kind="lib" path="test/lib/junit-4.8.1.jar"/>
 	<classpathentry kind="lib" path="/processing-core/apple.jar"/>
 	<classpathentry kind="lib" path="/Users/felix/Documents/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-test-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-tests.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
