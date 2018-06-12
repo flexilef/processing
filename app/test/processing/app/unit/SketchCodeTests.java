@@ -1,12 +1,15 @@
-package processing.app.unit;
+package processing.app;
 
 import java.io.File;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import junit.framework.Assert;
+//import junit.framework.Assert; //temp
+
+import org.junit.Assert;
 import processing.app.SketchCode;
+
 
 public class SketchCodeTests {
 
@@ -14,7 +17,10 @@ public class SketchCodeTests {
   private static String NEW_SKETCH_NAME = "SketchTestsNew.pde";
   private static String SKETCH_PATH_NEW = "test/resources/" + NEW_SKETCH_NAME;
   private static String PROGRAM = "System.out.println(\"Hello World\")";
+  private static String SKETCH_ORIGINAL_NAME ="SketchTests";
+  private static String SKETCH_CHANGED_NAME ="SketchTestsNew";
   private static int EMPTY_PROGRAM_LINE_COUNT = 1;
+  
   
   private File sketch;
   private File newSketch;
@@ -87,5 +93,20 @@ public class SketchCodeTests {
     int lines = sketchCode.getLineCount();
         
     Assert.assertEquals(EMPTY_PROGRAM_LINE_COUNT, lines);
+  }
+  
+  //@ameza: sketch is renamed
+  @Test
+  public void shouldRenameTo() throws IOException {    
+    SketchCode sketchCode = new SketchCode(sketch, ".pde");
+
+    if(sketch.exists()) {     
+      //System.out.println("renaming " + sketchCode.getPrettyName() + " to "+ newSketch.getName());
+      Assert.assertEquals( sketchCode.getPrettyName(), SKETCH_ORIGINAL_NAME);
+      sketchCode.renameTo(newSketch, ".pde");
+      //System.out.println(sketchCode.getPrettyName()+ " name changed");
+    }
+    Assert.assertEquals( sketchCode.getPrettyName(), SKETCH_CHANGED_NAME);
+   
   }
 }
