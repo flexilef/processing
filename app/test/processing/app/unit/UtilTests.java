@@ -1,10 +1,8 @@
-package processing.app;
+package processing.app.unit;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;

@@ -122,8 +122,8 @@ public class SketchCode {
     return file.delete();
   }
 
-
-  protected boolean renameTo(File what, String ext) {
+//TODO: switch back to protected
+  public boolean renameTo(File what, String ext) {
 //    System.out.println("renaming " + file);
 //    System.out.println("      to " + what);
     boolean success = file.renameTo(what);
