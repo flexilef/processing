@@ -1,4 +1,4 @@
-package test.processing.mode.java;
+package src.test.processing.mode.java;
 
 import java.io.File;
 import java.io.FileWriter;

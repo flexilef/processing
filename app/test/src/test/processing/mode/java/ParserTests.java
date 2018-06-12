@@ -1,4 +1,4 @@
-package test.processing.mode.java;
+package src.test.processing.mode.java;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

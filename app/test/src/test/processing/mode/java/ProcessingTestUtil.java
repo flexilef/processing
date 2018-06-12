@@ -1,4 +1,4 @@
-package test.processing.mode.java;
+package src.test.processing.mode.java;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,8 +9,8 @@ import antlr.ANTLRException;
 import processing.app.Base;
 import processing.app.Preferences;
 import processing.app.SketchException;
-import processing.mode.java.preproc.PdePreprocessor;
 import processing.mode.java.AutoFormat;
+import processing.mode.java.preproc.PdePreprocessor;
 
 public class ProcessingTestUtil {
   static void init() {
